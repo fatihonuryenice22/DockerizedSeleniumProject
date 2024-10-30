@@ -3,6 +3,7 @@ package Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.ElementHelper;
 
@@ -45,7 +46,19 @@ public class TraumPage {
     static By bop= By.xpath("(//span[@class='text-white leading-5 font-sans font-normal md:text-sm 5xl:text-xl text-[14px] hover:text-[#CF6300]'][normalize-space()='Become Our Partner'])[1]");
     static By contact= By.xpath("(//span[normalize-space()='Contact'])[1]");
     static By products= By.xpath("(//span[normalize-space()='Products'])[1]");
+    static By uva=By.xpath("//h3[normalize-space()='Uva Mela Blend Coffee | Dark Roasted']");
     static By stayintouch=By.xpath("(//span[contains(@class,'font-butler capitalize text-[#CF6300] 5xl:text-2xl text-[18px] md:text-xl font-bold leading-7 mt-2 underline')])[1]");
+   static By addtocart=By.xpath("(//div[contains(@class,'text-[#FFFFFF] lg:text-[16px] text-[14px] flex justify-center font-sans font-black self-center uppercase')])[1]");
+    static By uvaincart=By.xpath("(//div[contains(@class,'font-extrabold xl:text-[13px]')])[1]");
+    static By completeOrderButton=By.xpath("(//div[contains(@class,'text-[#FFFFFF] xs:text-[16px] text-[10px] md:text-[14px] sm:text-[11px] lg:text-[16px] flex justify-center font-sans font-black self-center uppercase')])[1]");
+    static By submitbtn=By.xpath("(//button[@id='submitBtn'])[1]");
+    static By emailarea2=By.xpath("(//input[@id='email'])[1]");
+    static By becomeapartneroption=By.xpath("(//button[normalize-space()='Become Our Partner'])[1]");
+    static By fullname=By.xpath("//input[@placeholder='Full Name']");
+    static By email=By.xpath("//input[@placeholder='Email']");
+    static By contactnr=By.xpath("//input[@placeholder='Contact Number']");
+    static By bnname=By.xpath("//input[@placeholder='Business Name']");
+    static By type=By.xpath("//select[@name='typeOfBusiness']");
     public TraumPage(WebDriver driver){
         this.driver = driver;
         this.wait = new WebDriverWait(driver,10);
@@ -213,5 +226,47 @@ public class TraumPage {
          elementHelper.findElement(products);
         elementHelper.findElement(stayintouch);
 
+    }
+
+    public static void addOneProduct() {
+    elementHelper.click(uva);
+    elementHelper.click(addtocart);
+    elementHelper.findElement(uvaincart);
+
+
+    }
+
+    public static void validateCart() {
+        elementHelper.findElement(uvaincart);
+        elementHelper.findElement(completeOrderButton);
+    }
+
+    public static void filltheform() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+        elementHelper.findElement(emailarea2).sendKeys("fatih.yenice@ronwell.net");
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+        WebElement element = driver.findElement(By.xpath("//button[@id='submitBtn']"));
+        if (element.isDisplayed() && element.isEnabled()) {
+            element.click();
+        } else {
+            System.out.println("Element başka bir içerik tarafından engellenmiş olabilir.");
+
+        }
+
+    }
+
+    public static void gotoPartnerPage() {
+        elementHelper.click(becomeapartneroption);
+
+    }
+
+    public static void validatebappage() {
+        elementHelper.findElement(fullname);
+        elementHelper.findElement(contactnr);
+        elementHelper.findElement(bnname);
+        elementHelper.findElement(email);
+        elementHelper.findElement(type);
     }
 }

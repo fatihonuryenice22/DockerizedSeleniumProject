@@ -71,4 +71,30 @@ TraumPage.closeBrowserM();
     public void validateFooter() {
         TraumPage.ValidateFooter();
     }
+
+    @When("Add one product to cart")
+    public void addOneProductToCart() {
+        TraumPage.addOneProduct();
+    }
+
+    @When("Check the cart")
+    public void checkTheCart() {
+        TraumPage.validateCart();
+    }
+
+    @When("Fill the Email Area")
+    public void fillTheEmailArea() {
+        TraumPage.filltheform();
+    }
+
+    @When("Goes to Become a partner page")
+    public void goesToBecomeAPartnerPage() {
+        TraumPage.gotoPartnerPage();
+
+    }
+
+    @When("Validates Page")
+    public void validatesPage() {
+        TraumPage.validatebappage();
+    }
 }
